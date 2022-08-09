@@ -14,14 +14,14 @@ fi
 
 git status
 git fetch
-# git config --global user.name "aida72"
-# git config --global user.email "idii5096@gmail.com"
+git config --global user.name "linuxgirl20"
+git config --global user.email "aidaliko3@gmail.com"
   if git merge-base --is-ancestor origin/main;then
    echo "no commits "
   else
    git pull
    new_commit="$(git rev-parse HEAD | cut -c 1-7)"
-   docker build -t 123456odi/todo-app:$new_commit
+   docker build -t 123456odi/todo-app:$new_commit .
    docker push 123456odi/todo-app:$new_commit
    helm upgrade app --install ./charts --set-string image.tag=$new_commit 
 
@@ -40,8 +40,8 @@ file_has_been_modified () {
 git fetch --tags
 latestTag=$(git describe --tags `git rev-list --tags --max-count=1`)
 
-# git config --global user.name "aida72"
-# git config --global user.email "idii5096@gmail.com"
+git config --global user.name "linuxgirl20"
+git config --global user.email "aidaliko3@gmail.com"
 
 read -e -p "Are you sure you want to release? " -n 1 -r
 echo
