@@ -23,7 +23,7 @@ git config --global user.email "aidaliko3@gmail.com"
    new_commit="$(git rev-parse HEAD | cut -c 1-7)"
    docker build -t 123456odi/todo-app:$new_commit .
    docker push 123456odi/todo-app:$new_commit
-   helm upgrade app --install ./charts --set-string image.tag=$new_commit 
+   helm upgrade app --install ./app/charts --set-string image.tag=$new_commit 
 
 file_has_been_modified () {
   if [ ! -f $1 ]; then
@@ -50,7 +50,7 @@ if [[ $REPLY =~ ^[Yy]$ ]]; then
   echo
   git add -a 
   git commit -m "Build version $version"
-  git tag -a v$version -m "Version $version"
+  git tag -a v $version -m "Version $version"
   git push origin main
   git push --tags
 
