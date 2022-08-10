@@ -2,10 +2,10 @@ filename=$dir"release.txt"
 version="$(grep 'App_version :' $filename | sed 's/^.*: //')"
 commit="$(grep 'Latest_commit:' $filename | sed 's/^.*: //')"
 
-if git checkout main &&
-    git fetch origin main &&
-    [ `git rev-list HEAD...origin/main --count` != 0 ] &&
-    git merge origin/main
+if git checkout master &&
+    git fetch origin master &&
+    [ `git rev-list HEAD...origin/master --count` != 0 ] &&
+    git merge origin/master
 then
     echo 'Updated!'
 else
@@ -16,7 +16,7 @@ git status
 git fetch
 git config --global user.name "linuxgirl20"
 git config --global user.email "aidaliko3@gmail.com"
-  if git merge-base --is-ancestor origin/main;then
+  if git merge-base --is-ancestor origin/master;then
    echo "no commits "
   else
    git pull
@@ -51,7 +51,7 @@ if [[ $REPLY =~ ^[Yy]$ ]]; then
   git add -a 
   git commit -m "Build version $version"
   git tag -a v $version -m "Version $version"
-  git push origin main
+  git push origin master
   git push --tags
 
   npm publish
@@ -73,13 +73,13 @@ ls -ltra $filename
 fi
 
 
-on_main_branch () {
-  [[ $(git symbolic-ref --short -q HEAD) == "main" ]] && return 0
+on_master_branch () {
+  [[ $(git symbolic-ref --short -q HEAD) == "master" ]] && return 0
   return 1
 }
 
 origin="origin"
-branch="main"
+branch="master"
 commit=$(git log -n 1 --pretty=format:%H "$origin/$branch")
 
 url=$(git remote get-url "$origin")
