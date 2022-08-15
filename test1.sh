@@ -48,7 +48,7 @@ echo
 if [[ $REPLY =~ ^[Yy]$ ]]; then
   echo -e "Release.."
   echo
-  git add -a 
+  git add . 
   git commit -m "Build version $version"
   git tag -a v $version -m "Version $version"
   git push origin master
